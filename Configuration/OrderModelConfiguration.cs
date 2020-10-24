@@ -19,7 +19,7 @@
             return order;
         }
 
-        public void Apply( ODataModelBuilder builder, ApiVersion apiVersion, string routePrefix )
+        public void Apply( ODataModelBuilder builder, ApiVersion apiVersion )
         {
             var order = ConfigureCurrent( builder );
             

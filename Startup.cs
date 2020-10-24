@@ -18,7 +18,10 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices( IServiceCollection services )
         {
-            services.AddControllers();
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
+            });
             services.AddApiVersioning(
                 options =>
                 {
@@ -31,12 +34,9 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure( IApplicationBuilder app, VersionedODataModelBuilder modelBuilder )
         {
-            app.UseRouting();
-            app.UseEndpoints(
+            app.UseMvc(
                 endpoints =>
                 {
-                    endpoints.MapControllers();
-
                     // INFO: you do NOT and should NOT use both the query string and url segment methods together.
                     // this configuration is merely illustrating that they can coexist and allows you to easily
                     // experiment with either configuration. one of these would be removed in a real application.
@@ -44,10 +44,10 @@
                     // INFO: only pass the route prefix to GetEdmModels if you want to split the models; otherwise, both routes contain all models
 
                     // WHEN VERSIONING BY: query string, header, or media type
-                    endpoints.MapVersionedODataRoute( "odata", "api", modelBuilder );
+                    endpoints.MapVersionedODataRoutes( "odata", "api", modelBuilder.GetEdmModels() );
 
                     // WHEN VERSIONING BY: url segment
-                    endpoints.MapVersionedODataRoute( "odata-bypath", "api/v{version:apiVersion}", modelBuilder );
+                    endpoints.MapVersionedODataRoutes( "odata-bypath", "api/v{version:apiVersion}", modelBuilder.GetEdmModels() );
                 } );
         }
     }
