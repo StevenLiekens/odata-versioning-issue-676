@@ -10,7 +10,7 @@
 /api/v1/orders/42
 
 {
-  "@odata.context": "http://localhost:5000/api/v%7Bversion:apiVersion%7D/$metadata#Orders/$entity",
+  "@odata.context": "http://localhost:5000/api/v1/$metadata#Orders/$entity",
   "id": 0,
   "createdDate": "2000-12-12",
   "customer": "Bill Mei"
@@ -19,7 +19,7 @@
 /api/v2/orders/42
 
 {
-  "@odata.context": "http://localhost:5000/api/v%7Bversion:apiVersion%7D/$metadata#Orders/$entity",
+  "@odata.context": "http://localhost:5000/api/v2/$metadata#Orders/$entity",
   "id": 0,
   "createdDate": "2012-12-12T12:12:12.121+02:00",
   "customer": "Bill Mei"
@@ -34,7 +34,7 @@ The call to v2 seems to use the model property for v1. Other than that it does a
 /api/v1/orders/42 (OK)
 
 {
-  "@odata.context": "http://localhost:5000/api/v%7Bversion:apiVersion%7D/$metadata#Orders/$entity",
+  "@odata.context": "http://localhost:5000/api/v1/$metadata#Orders/$entity",
   "id": 0,
   "createdDate": "2000-12-12",
   "customer": "Bill Mei"
@@ -43,7 +43,7 @@ The call to v2 seems to use the model property for v1. Other than that it does a
 /api/v2/orders/42 (Not OK)
 
 {
-  "@odata.context": "http://localhost:5000/api/v%7Bversion:apiVersion%7D/$metadata#Orders/$entity",
+  "@odata.context": "http://localhost:5000/api/v2/$metadata#Orders/$entity",
   "id": 0,
   "createdDate": "2000-12-12T00:00:00+01:00",
   "customer": "Bill Mei"
